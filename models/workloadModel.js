@@ -26,6 +26,12 @@ const workloadSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
+
+    quantity: {
+        type: Number,
+        required: true,
+        default: 1,
+    }
 })
 
 const Workload = mongoose.model('workloads', workloadSchema)

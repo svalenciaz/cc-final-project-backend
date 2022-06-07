@@ -27,6 +27,12 @@ const assignationSchema = mongoose.Schema({
         required: true,
         default: []
     },
+
+    done: {
+        type: Number,
+        required: true,
+        default: 0,
+    }
 })
 
 const Assignation = mongoose.model('assignations', assignationSchema)
