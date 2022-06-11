@@ -16,11 +16,19 @@ const getAssignationById = asyncHandler(async(req, res) => {
 })
 
 
-const getAssignations = asyncHandler(async(req, res) => {
+const getAssignationsByUser = asyncHandler(async(req, res) => {
 
     var UserId = mongoose.Types.ObjectId(req.params.id);
 
     const assignations = await Assignation.find({user: UserId});
+
+    res.json(assignations)
+
+})
+
+const getAssignations = asyncHandler(async(req, res) => {
+
+    const assignations = await Assignation.find({});
 
     res.json(assignations)
 
@@ -54,4 +62,4 @@ const createAssignations = asyncHandler(async(req, res) => {
 
 })
 
-export { getAssignationById, getAssignations, editAssignations, createAssignations }
+export { getAssignationById, getAssignations, editAssignations, createAssignations, getAssignationsByUser }

@@ -18,9 +18,7 @@ const getUserById = asyncHandler(async(req, res) => {
 
 const getUsers = asyncHandler(async(req, res) => {
 
-    var UserId = mongoose.Types.ObjectId(req.params.id);
-
-    const users = await User.find({user: UserId});
+    const users = await User.find({});
 
     res.json(users)
 
@@ -41,16 +39,14 @@ const editUsers = asyncHandler(async(req, res) => {
 })
 
 const createUsers = asyncHandler(async(req, res) => {
-
-    var info = req.body;
-
-    const user = await User.create(info);
-
-    if(user){
-        res.json(user)
-    } else{
-        res.status(404).json({message: 'User Not Found'})
-    }
+    console.log(req.body);
+    const newUser = await new User({
+        name: req.body.name,
+        experience: req.body.experience,
+        isActive: req.body.isActive
+     }).save()
+     .then(user => res.json(user))
+     .catch(err => res.status(404).json({message: 'User Not created', error: err}));
 
 })
 

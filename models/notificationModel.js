@@ -16,6 +16,11 @@ const notificationSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    
+    user: {
+        type: mongoose.ObjectId,
+        required: true,
+    }
 })
 
 const Notification = mongoose.model('notifications', notificationSchema)

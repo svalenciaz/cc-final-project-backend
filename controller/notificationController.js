@@ -16,11 +16,19 @@ const getNotificationById = asyncHandler(async(req, res) => {
 })
 
 
-const getNotifications = asyncHandler(async(req, res) => {
+const getNotificationsByUser = asyncHandler(async(req, res) => {
 
     var UserId = mongoose.Types.ObjectId(req.params.id);
 
     const notifications = await Notification.find({user: UserId});
+
+    res.json(notifications)
+
+})
+
+const getNotifications = asyncHandler(async(req, res) => {
+
+    const notifications = await Notification.find({});
 
     res.json(notifications)
 
@@ -54,4 +62,4 @@ const createNotifications = asyncHandler(async(req, res) => {
 
 })
 
-export { getNotificationById, getNotifications, editNotifications, createNotifications }
+export { getNotificationById, getNotifications, editNotifications, createNotifications, getNotificationsByUser }

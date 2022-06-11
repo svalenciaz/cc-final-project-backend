@@ -1,9 +1,11 @@
 import express from 'express';
-import { getNotificationById, getNotifications, editNotifications, createNotifications } from '../controller/notificationController.js';
+import { getNotificationById, getNotifications, editNotifications, createNotifications, getNotificationsByUser} from '../controller/notificationController.js';
 
 const router = express.Router()
 
-router.route('/user/:id').get(getNotifications)
+router.route('/').get(getNotifications)
+
+router.route('/user/:id').get(getNotificationsByUser)
 
 router.route('/:id').get(getNotificationById)
 

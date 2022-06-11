@@ -18,11 +18,33 @@ const getEvaluationById = asyncHandler(async(req, res) => {
 
 const getEvaluations = asyncHandler(async(req, res) => {
 
-    var ids = mongoose.Types.ObjectId(req.body.evaluations);
+    if (req.query.list) {
+        const ids_list = req.query.list
 
-    const evaluations = await Evaluation.find({_id: {$in: ids}});
+        if (ids_list instanceof Array){
+            var ids = ids_list.map( function(_id) {return mongoose.Types.ObjectId(_id)});
+    
+            console.log(ids);
+        
+            const evaluations = await Evaluation.find({_id: {$in: ids}});
 
-    res.json(evaluations)
+            res.json(evaluations);
+        } else  {
+            var id =  mongoose.Types.ObjectId(ids_list);
+    
+            console.log(ids);
+        
+            const evaluations = await Evaluation.find({_id: id});
+
+            res.json(evaluations);
+        }
+    } else {
+        const evaluations = await Evaluation.find({});
+
+        res.json(evaluations);
+    }
+
+    
 
 })
 
@@ -40,4 +62,17 @@ const editEvaluations = asyncHandler(async(req, res) => {
 
 })
 
-export { getEvaluationById, getEvaluations, editEvaluations }
+const createEvaluations = asyncHandler(async(req, res) => {
+    var info = req.body;
+
+    const evaluation = await Evaluation.create(info);
+
+    if(evaluation){
+        res.json(evaluation)
+    } else{
+        res.status(404).json({message: 'Evaluation Not Created'})
+    }
+
+})
+
+export { getEvaluationById, getEvaluations, editEvaluations, createEvaluations }

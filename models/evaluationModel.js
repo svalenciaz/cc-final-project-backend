@@ -34,6 +34,11 @@ const evaluationSchema = mongoose.Schema({
         required: false,
         default: 0
     },
+
+    date: {
+        type: Date,
+        required: true,
+    },
 })
 
 const Evaluation = mongoose.model('evaluations', evaluationSchema)

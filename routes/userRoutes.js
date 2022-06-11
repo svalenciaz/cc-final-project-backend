@@ -3,7 +3,7 @@ import { getUserById, getUsers, editUsers, createUsers } from '../controller/use
 
 const router = express.Router()
 
-router.route('/user/:id').get(getUsers)
+router.route('/').get(getUsers)
 
 router.route('/:id').get(getUserById)
 

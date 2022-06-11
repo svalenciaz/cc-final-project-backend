@@ -18,9 +18,7 @@ const getWorkloadById = asyncHandler(async(req, res) => {
 
 const getWorkloads = asyncHandler(async(req, res) => {
 
-    var UserId = mongoose.Types.ObjectId(req.params.id);
-
-    const workloads = await Workload.find({user: UserId});
+    const workloads = await Workload.find({});
 
     res.json(workloads)
 
@@ -54,4 +52,13 @@ const createWorkloads = asyncHandler(async(req, res) => {
 
 })
 
-export { getWorkloadById, getWorkloads, editWorkloads, createWorkloads }
+const getWorkloadsByUser = asyncHandler(async(req, res) => {
+
+    var UserId = mongoose.Types.ObjectId(req.params.id);
+
+    const workloads = await Workload.find({user: UserId});
+
+    res.json(workloads)
+})
+
+export { getWorkloadById, getWorkloads, editWorkloads, createWorkloads, getWorkloadsByUser }
